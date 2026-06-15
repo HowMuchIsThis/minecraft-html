@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minecraft - HTML Edition</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- スタート画面 -->
+    <div id="startScreen" class="screen active">
+        <div class="start-container">
+            <h1 class="minecraft-title">MINECRAFT</h1>
+            <div class="start-buttons">
+                <button class="start-btn" onclick="startGame('creative')">クリエイティブモード</button>
+                <button class="start-btn" onclick="startGame('survival')">サバイバルモード</button>
+                <button class="start-btn" onclick="showSettings()">設定</button>
+                <button class="start-btn quit-btn" onclick="window.close()">終了</button>
+            </div>
+            <p class="version">HTML Edition Alpha 1.0</p>
+        </div>
+    </div>
+
+    <!-- 設定画面 -->
+    <div id="settingsScreen" class="screen">
+        <div class="settings-container">
+            <h1>設定</h1>
+            <div class="settings-content">
+                <div class="setting-item">
+                    <label>影MOD:</label>
+                    <input type="checkbox" id="shadowModToggle" class="toggle-checkbox">
+                    <span id="shadowModStatus">OFF</span>
+                </div>
+                <div class="setting-item">
+                    <label>画質: </label>
+                    <select id="renderDistance">
+                        <option value="32">遠</option>
+                        <option value="16" selected>標準</option>
+                        <option value="8">近</option>
+                    </select>
+                </div>
+            </div>
+            <button class="start-btn" onclick="backToStart()">戻る</button>
+        </div>
+    </div>
+
+    <!-- ゲーム画面 -->
+    <div id="gameScreen" class="screen">
+        <canvas id="gameCanvas"></canvas>
+        
+        <!-- UI要素 -->
+        <div id="ui-container">
+            <!-- クロスヘア -->
+            <div id="crosshair"></div>
+            
+            <!-- ホットバー -->
+            <div id="hotbar">
+                <div id="hotbar-slots"></div>
+            </div>
+            
+            <!-- インベントリ画面 -->
+            <div id="inventoryScreen" class="inventory-hidden">
+                <div class="inventory-container">
+                    <h2>インベントリ</h2>
+                    <div class="inventory-tabs">
+                        <button class="tab-btn active" onclick="switchInventoryTab('blocks')">ブロック</button>
+                        <button class="tab-btn" onclick="switchInventoryTab('tools')">ツール</button>
+                        <button class="tab-btn" onclick="switchInventoryTab('misc')">その他</button>
+                        <button class="tab-btn" onclick="switchInventoryTab('mobs')">モブ</button>
+                    </div>
+                    <div id="inventoryGrid"></div>
+                    <button onclick="closeInventory()">閉じる (E)</button>
+                </div>
+            </div>
+            
+            <!-- 作業台インターフェース -->
+            <div id="craftingScreen" class="crafting-hidden">
+                <div class="crafting-container">
+                    <h2>作業台</h2>
+                    <div class="crafting-grid" id="craftingGrid"></div>
+                    <div class="crafting-output">
+                        <div id="craftingOutput"></div>
+                    </div>
+                    <button onclick="closeCrafting()">閉じる</button>
+                </div>
+            </div>
+            
+            <!-- かま焼きインターフェース -->
+            <div id="furnaceScreen" class="furnace-hidden">
+                <div class="furnace-container">
+                    <h2>かま</h2>
+                    <div class="furnace-grid">
+                        <div class="furnace-slot">
+                            <div id="furnaceInput">入力</div>
+                        </div>
+                        <div class="furnace-arrow" id="furnaceArrow">→</div>
+                        <div class="furnace-slot">
+                            <div id="furnaceOutput">出力</div>
+                        </div>
+                        <div class="furnace-fuel-slot">
+                            <div id="furnaceFuel">燃料</div>
+                        </div>
+                    </div>
+                    <button onclick="closeFurnace()">閉じる</button>
+                </div>
+            </div>
+            
+            <!-- デバッグ情報 -->
+            <div id="debug-info"></div>
+            
+            <!-- メッセージ -->
+            <div id="message-box"></div>
+        </div>
+    </div>
+
+    <script src="constants.js"></script>
+    <script src="utils.js"></script>
+    <script src="blocks.js"></script>
+    <script src="terrain.js"></script>
+    <script src="mobs.js"></script>
+    <script src="particles.js"></script>
+    <script src="renderer.js"></script>
+    <script src="player.js"></script>
+    <script src="inventory.js"></script>
+    <script src="crafting.js"></script>
+    <script src="game.js"></script>
+</body>
+</html>
